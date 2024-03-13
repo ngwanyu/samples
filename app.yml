@@ -1,0 +1,22 @@
+---
+- hosts: appserver
+  become: true
+  tasks:
+  - name: create User 'admin'
+    user:
+      name: admin
+      password: "{{ admin_password: !vault }}"
+      state: present
+    no_log: true #prevents logging of sensitive information
+
+- name: Ensure the user 'admin' has a specific password
+  user:
+    name: admin
+    password: "{{ admin_password: !vault }}"
+    update_password: on_create #only sets password if the user was created
+
+
+      # command: useradd admin
+      #- name: assign password
+      #shell: passwd admin
+
