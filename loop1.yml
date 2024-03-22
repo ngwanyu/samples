@@ -1,0 +1,27 @@
+#---
+#- hosts: app_server
+# become: yes
+## tasks: 
+# - name: Install Packages
+#    yum:
+#      name: "{{items}}"
+#      update_cache: yes
+#      state: latest
+#      loop:
+#        - vim
+#        - isof
+#        - nano
+#        - tree
+#        - git 
+#
+#
+#
+---
+- hosts: app_server
+  become: true
+  tasks: 
+  - name: Install Packages
+    package:
+      name: [vim,git,nano,tree]
+      update_cache: yes
+      state: latest  
